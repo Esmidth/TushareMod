@@ -1,0 +1,17 @@
+# ~~~~~ Done
+Target:
+    #模拟MACD的回报率     talibPrac.py
+    #获取全部数据
+    #将数据保存在本地---excel
+Todo:
+    #MACD加上顶背离和底背离
+    #IO.py 多线程实现
+    #tushare.get_h_data 与 tushare.get_hist_data为什么会产生不同的数据
+    #generate Pandas DataFrame
+    #Jetbrains 的Todo格式
+    #BOLL参数的准确性
+    #MACD && BOLL 背离与BOLL强势弱势区间
+    #RSI
+    #KDJ
+Strategy:
+    #涨跌停的交易问题
