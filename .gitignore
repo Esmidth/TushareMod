@@ -1,0 +1,4 @@
+*.xlsx
+*.csv
+__pycache__/StringHandler.cpython-34.pyc
+*.pyc
