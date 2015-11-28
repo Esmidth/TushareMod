@@ -1,18 +1,20 @@
 __author__ = 'Esmidth'
-
+import time
 import tushare as ts
 import pandas as pd
 import StringHandler as sh
 
 
 def write(fileName, id):
-    df = ts.get_hist_data(id, start='2000-01-01')
+    df = ts.get_hist_data(id)  # , start='2000-01-01')
     if type(df) != type(None):
         df = df.sort_index(ascending=True)
         df.to_excel(fileName, sheet_name='Sheet1', index=True, index_label='date', merge_cells=False)
-        return 1
+        print("%s Done" % id)
+        # return 1
     else:
-        return 0
+        print("%s Fail" % id)
+        #return 0
 
 
 def load(fileName):
@@ -22,12 +24,11 @@ def load(fileName):
 def downloadAll(date):
     path = 'DataBase_' + date.__str__()
     for x in sh.lists:
-        if write(path + '\\' + x + '.xlsx', x) == 1:
-            print("%s Done" % x)
-        else:
-            print("%s Fail" % x)
+        write(path + '\\' + x + '.xlsx', x)
     print("Download finished")
 
 
 if __name__ == '__main__':
-    downloadAll(20151106)
+    print("timer started:%s" % time.clock())
+    downloadAll(20151128)
+    print("timer ended:%s" % time.clock())
