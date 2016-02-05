@@ -4,7 +4,6 @@ import tushare as ts
 import pandas as pd
 import StringHandler as sh
 
-
 def write(fileName, id):
     df = ts.get_hist_data(id)  # , start='2000-01-01')
     if type(df) != type(None):
@@ -15,7 +14,6 @@ def write(fileName, id):
     else:
         print("%s Fail" % id)
         #return 0
-
 
 def load(fileName):
     return pd.read_excel(fileName, 'Sheet1', index_col='date')
