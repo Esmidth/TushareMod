@@ -92,7 +92,8 @@ def main2():
 if __name__ == "__main__":
     path = 'DataBase_20151106\\'
     # IO.write('600086.xlsx','600086')
-    ori = IO.load(path + '600080.xlsx')
+    # ori = IO.load(path + '600080.xlsx')
+    ori = ts.get_hist_data('600080')
     print(MACDMethod(ori))
     # main2()
 
