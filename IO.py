@@ -5,11 +5,11 @@ import pandas as pd
 import StringHandler as sh
 
 
-def write(fileName, id):
+def write(filename, id):
 	df = ts.get_hist_data(id)  # , start='2000-01-01')
 	if type(df) != type(None):
 		df = df.sort_index(ascending=True)
-		df.to_excel(fileName, sheet_name='Sheet1', index=True, index_label='date', merge_cells=False)
+		df.to_excel(filename, sheet_name='Sheet1', index=True, index_label='date', merge_cells=False)
 		print("%s Done" % id)
 	# return 1
 	else:
@@ -17,8 +17,8 @@ def write(fileName, id):
 	# return 0
 
 
-def load(fileName):
-	return pd.read_excel(fileName, 'Sheet1', index_col='date')
+def load(filename):
+	return pd.read_excel(filename, 'Sheet1', index_col='date')
 
 
 def downloadAll(date):
@@ -29,6 +29,6 @@ def downloadAll(date):
 
 
 if __name__ == '__main__':
-	print("timer started:%s" % time.clock())
-	downloadAll(20151128)
-	print("timer ended:%s" % time.clock())
+	print("timer started:%ss" % time.clock())
+	downloadAll(20160212)
+	print("timer ended:%ss" % time.clock())

@@ -3,6 +3,7 @@ __author__ = 'Esmidth'
 import numpy as np
 import talib
 import tushare as ts
+import os
 import IO
 import StringHandler as sh
 import pandas as pd
@@ -39,7 +40,7 @@ def MACDMethod(DataIn):
         i += 1
         #   print(startFund)
 
-    purchaseLog(DataIn, DataOut, buyIndex, sellIndex)
+    #    purchaseLog(DataIn, DataOut, buyIndex, sellIndex)
     #   return startFund / 100
     # days = DataIn.index[-1] - DataIn.index[0]
     #   startFund= startFund/100
@@ -70,13 +71,23 @@ def main1():
 
 
 def main2():
-    path = 'DataBase_20151106\\'
+    path = 'DataBase_20160212\\'
+    files = os.listdir(path)
     dic = {}
     vals = []
     i = 1
     lenth = len(sh.DataBase20151106)
+    '''
     for x in sh.DataBase20151106:
         profit = MACDMethod(IO.load(path + x + '.xlsx')) * 100
+        dic[profit] = x
+        vals.append(profit)
+        print("%.2f%%  %s Done\t Profit: %s%%" % (100 * i / lenth, x, profit))
+        i += 1
+     '''
+
+    for x in files:
+        profit = MACDMethod(IO.load(path + x)) * 100
         dic[profit] = x
         vals.append(profit)
         print("%.2f%%  %s Done\t Profit: %s%%" % (100 * i / lenth, x, profit))
@@ -90,20 +101,23 @@ def main2():
 
 
 if __name__ == "__main__":
+    '''
     path = 'DataBase_20151106\\'
     # IO.write('600086.xlsx','600086')
     # ori = IO.load(path + '600080.xlsx')
     ori = ts.get_hist_data('600080')
     print(MACDMethod(ori))
-    # main2()
-
     '''
+    main2()
+    '''
+
     dic = {}
     dic['123123'] = 123123
     dic['1000'] = 3
     dic['2131231'] = 4
     dic['123123a'] = -12312
-
+'''
+    '''
     x = sorted(dic.values())
     x.reverse()
     print(x)
