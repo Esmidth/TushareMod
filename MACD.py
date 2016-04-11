@@ -40,7 +40,7 @@ def MACDMethod(DataIn):
         i += 1
         #   print(startFund)
 
-    #    purchaseLog(DataIn, DataOut, buyIndex, sellIndex)
+    # purchaseLog(DataIn, DataOut, buyIndex, sellIndex)
     #   return startFund / 100
     # days = DataIn.index[-1] - DataIn.index[0]
     #   startFund= startFund/100

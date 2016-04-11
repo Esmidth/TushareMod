@@ -30,5 +30,5 @@ def downloadAll(date):
 
 if __name__ == '__main__':
 	print("timer started:%ss" % time.clock())
-	downloadAll(20160212)
+	downloadAll(20160405)
 	print("timer ended:%ss" % time.clock())
