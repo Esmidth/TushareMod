@@ -15,8 +15,8 @@ def MACDMethod(DataIn):
     :type DataIn: DataFrame
     :type Output:DataFrame
     """
-    buyIndex = []
-    sellIndex = []
+    buyLog = []
+    sellLog = []
     DataOut = talib.abstract.MACD(DataIn, 12, 26, 9, 1)
     # print(output[output > 0][output<0.03]['macdhist'])
     i = 0
@@ -25,16 +25,16 @@ def MACDMethod(DataIn):
     for x in DataOut['macdhist']:
         if have == False and x > 0:
             have = True
-            buyIndex.append(i)
+            buyLog.append(i)
         elif have == True and x < 0:
             have = False
-            sellIndex.append(i)
+            sellLog.append(i)
         i += 1
     i = 0
     startFund = 100
-    for x in sellIndex:
-        num = DataIn['close'][sellIndex[i]] - DataIn['close'][buyIndex[i]]
-        num = num / DataIn['close'][buyIndex[i]]
+    for x in sellLog:
+        num = DataIn['close'][sellLog[i]] - DataIn['close'][buyLog[i]]
+        num = num / DataIn['close'][buyLog[i]]
         startFund = startFund * (1 + num)
         # print(startFund)
         i += 1
@@ -48,13 +48,13 @@ def MACDMethod(DataIn):
     return startFund / 100  # / (days.days)
 
 
-def purchaseLog(inputs, outputs, buyIndex, sellIndex):
+def purchaseLog(inputs, outputs, buyLog, sellLog):
     i = 0
-    for x in sellIndex:
+    for x in sellLog:
         print("------------------------------------------------------")
-        print(inputs.index[buyIndex[i]], inputs['close'][buyIndex[i]])
-        print(inputs.index[sellIndex[i]], inputs['close'][sellIndex[i]])
-        num = (inputs['close'][sellIndex[i]] - inputs['close'][buyIndex[i]]) * 100 / inputs['close'][buyIndex[i]]
+        print(inputs.index[buyLog[i]], inputs['close'][buyLog[i]])
+        print(inputs.index[sellLog[i]], inputs['close'][sellLog[i]])
+        num = (inputs['close'][sellLog[i]] - inputs['close'][buyLog[i]]) * 100 / inputs['close'][buyLog[i]]
         print("%.3f%%" % num)
         i += 1
 
@@ -70,13 +70,14 @@ def main1():
         #  d = MACDMethod(ori)
 
 
-def main2():
+def testAll():
     path = 'DataBase_20160212\\'
     files = os.listdir(path)
     dic = {}
     vals = []
     i = 1
-    lenth = len(sh.DataBase20151106)
+    # lenth = len(sh.DataBase20151106)
+    length = len(files)
     '''
     for x in sh.DataBase20151106:
         profit = MACDMethod(IO.load(path + x + '.xlsx')) * 100
@@ -90,7 +91,7 @@ def main2():
         profit = MACDMethod(IO.load(path + x)) * 100
         dic[profit] = x
         vals.append(profit)
-        print("%.2f%%  %s Done\t Profit: %s%%" % (100 * i / lenth, x, profit))
+        print("%.2f%%  %s Done\t Profit: %s%%" % (100 * i / length, x, profit))
         i += 1
     vals = sorted(vals)
     vals.reverse()
@@ -108,7 +109,7 @@ if __name__ == "__main__":
     ori = ts.get_hist_data('600080')
     print(MACDMethod(ori))
     '''
-    main2()
+    testAll()
     '''
 
     dic = {}

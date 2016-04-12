@@ -8,7 +8,7 @@ def multi_download(date):
     threads = []
     path = 'DataBase_' + date.__str__()
     for x in Sh.lists:
-        threads.append(threading.Thread(target=IO.write, args=(path + '\\' + x + '.xlsx', x)))
+        threads.append(threading.Thread(target=IO.download, args=(path + '\\' + x + '.xlsx', x)))
     for t in threads:
         t.setDaemon(True)
         t.start()
