@@ -4,9 +4,9 @@ Target:
     #获取全部数据
     #将数据保存在本地---excel
     #IO.py 多线程实现 -> MTIO.py     仍有部分错误，会少一些股票没有收录，仍需debug。根据20151127，20151128 两组数据，共有37只3开头的股票未被收录
+    #增加输出excel表格的能力
 Todo:
     #增加输出log功能
-    #增加输出excel表格的能力
     #MACD加上顶背离和底背离
     #tushare.get_h_data 与 tushare.get_hist_data为什么会产生不同的数据
     #generate Pandas DataFrame

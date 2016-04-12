@@ -26,6 +26,7 @@
 
  - download (filename,id)
  - load (filename)
+ - outputToExcel (date,dic,profits)
  - downloadAll (date)
 
 

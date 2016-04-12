@@ -74,8 +74,8 @@ def testAll():
     path = 'DataBase_20160212\\'
     files = os.listdir(path)
     dic = {}
-    vals = []
-    i = 1
+    profits = []
+    idd = 1
     # lenth = len(sh.DataBase20151106)
     length = len(files)
     '''
@@ -87,18 +87,19 @@ def testAll():
         i += 1
      '''
 
-    for x in files:
-        profit = MACDMethod(IO.load(path + x)) * 100
-        dic[profit] = x
-        vals.append(profit)
-        print("%.2f%%  %s Done\t Profit: %s%%" % (100 * i / length, x, profit))
-        i += 1
-    vals = sorted(vals)
-    vals.reverse()
-    i = 1
-    for x in vals:
-        print("#%s\t%s:\t%.2f%%" % (i, dic[x], x))
-        i += 1
+    for file in files:
+        profit = MACDMethod(IO.load(path + file)) * 100
+        dic[profit] = file
+        profits.append(profit)
+        print("%.2f%%  %s Done\t Profit: %s%%" % (100 * idd / length, file, profit))
+        idd += 1
+    profits = sorted(profits)
+    profits.reverse()
+    idd = 1
+    for profit in profits:
+        print("#%s\t%s:\t%.2f%%" % (idd, dic[profit], profit))
+        idd += 1
+    IO.outputToExcel('2016_04_12', dic, profits)
 
 
 if __name__ == "__main__":
