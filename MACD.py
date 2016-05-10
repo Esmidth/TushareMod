@@ -71,7 +71,7 @@ def main1():
 
 
 def testAll():
-    path = 'DataBase_20160212\\'
+    path = '/DataBase_20160205'
     files = os.listdir(path)
     dic = {}
     profits = []
