@@ -2,7 +2,7 @@ import talib
 import tushare as ts
 import pandas as pd
 import MACD
-import IO
+import Download
 import os
 
 
@@ -52,7 +52,7 @@ def main():
     files = os.listdir(path)
     lenth = len(files)
     for x in files:
-        profit = RSI6(IO.load(path + x)) * 100
+        profit = RSI6(Download.load(path + x)) * 100
         dic[profit] = x
         vals.append(profit)
         print("%.2f%%   %s  Done\t Profit: %s%%" % (100 * i / lenth, x, profit))

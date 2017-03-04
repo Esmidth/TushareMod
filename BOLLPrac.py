@@ -1,7 +1,7 @@
 import tushare as ts
 import pandas as pd
 import talib as ta
-import IO
+import Download
 
 
 def BOLL(DataIn):
@@ -30,5 +30,5 @@ def BOLL(DataIn):
 
 if __name__ == "__main__":
     path = 'DataBase_20151106\\'
-    ori = IO.load(path + '600080.xlsx')
+    ori = Download.load(path + '600080.xlsx')
     print(BOLL(ori))
