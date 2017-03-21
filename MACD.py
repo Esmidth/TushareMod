@@ -4,7 +4,7 @@ import numpy as np
 import talib
 import tushare as ts
 import os
-import Download
+import IOput
 import StringHandler as sh
 import pandas as pd
 import time
@@ -12,7 +12,7 @@ import time
 
 def MACDMethod(DataIn):
     DataIn = DataIn.sort_index(ascending=True)  # Must Sort Raw Data First Or Calculate in a reserved index
-    Log = True
+    Log = False
     """
     :type DataIn: DataFrame
     :type Output:DataFrame
@@ -44,7 +44,7 @@ def MACDMethod(DataIn):
 
     if Log:
         purchaseLog(DataIn, DataOut, buyLog, sellLog)
-        return startFund / 100
+    return startFund / 100
 
 
 # days = DataIn.index[-1] - DataIn.index[0]
@@ -57,8 +57,8 @@ def purchaseLog(inputs, outputs, buyLog, sellLog):
     i = 0
     for x in sellLog:
         print("------------------------------------------------------")
-        print(inputs.index[buyLog[i]], inputs['close'][buyLog[i]])
-        print(inputs.index[sellLog[i]], inputs['close'][sellLog[i]])
+        print("Buy: \t", inputs.index[buyLog[i]], inputs['close'][buyLog[i]])
+        print("Sell: \t", inputs.index[sellLog[i]], inputs['close'][sellLog[i]])
         num = (inputs['close'][sellLog[i]] - inputs['close'][buyLog[i]]) * 100 / inputs['close'][buyLog[i]]
         print("%.3f%%" % num)
         i += 1
@@ -69,14 +69,14 @@ def main1():
     for x in files:
         print('----------------------')
         print(x)
-        print(MACDMethod(Download.load(x + '.xlsx')))
+        print(MACDMethod(IOput.load(x + '.xlsx')))
         #   ori = ori.sort_index(ascending=True)
         # print(ori)
         #  d = MACDMethod(ori)
 
 
 def testAll(date):
-    path = '/Users/Esmidth/Documents/Github/TushareMod/DataBase' + date.__str__() + '/'
+    path = 'DataBase' + date.__str__() + '/'
     files = os.listdir(path)
     dic = {}
     profits = []
@@ -93,7 +93,7 @@ def testAll(date):
      '''
 
     for file in files:
-        profit = MACDMethod(Download.load(path + file)) * 100
+        profit = MACDMethod(IOput.load(path + file)) * 100
         dic[profit] = file
         profits.append(profit)
         print("%.2f%%  %s Done\t Profit: %s%%" % (100 * idd / length, file, profit))
@@ -104,7 +104,7 @@ def testAll(date):
     for profit in profits:
         print("#%s\t%s:\t%.2f%%" % (idd, dic[profit], profit))
         idd += 1
-    Download.outputToExcel('2016_04_12', dic, profits)
+    IOput.outputToExcel('2016_04_12', dic, profits)
 
 
 if __name__ == "__main__":
@@ -115,14 +115,14 @@ if __name__ == "__main__":
     ori = ts.get_hist_data('600080')
     print(MACDMethod(ori))
     '''
-    # testAll(date = 20160510)
+    testAll(date=20170321)
 
     # path = './DataBase20160510/'
     # file = '600080.xlsx'
     # ori = IO.load(path + file)
-    ori = ts.get_hist_data('600080')
+    # ori = ts.get_hist_data('600080',start='2016-01-01')
     # ori = ori.sort_index(ascending=True)
-    print(MACDMethod(ori))
+    #print(MACDMethod(ori))
     '''
 
     dic = {}

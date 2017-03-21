@@ -22,12 +22,14 @@
 
 ----------
 
-###IO
+###IOput
 
  - download (filename,id)
  - load (filename)
+ - load_chosen_stocks(filename)
  - outputToExcel (date,dic,profits)
  - downloadAll (date)
+
 
 
 ----------

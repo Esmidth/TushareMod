@@ -3,6 +3,7 @@ import time
 import tushare as ts
 import pandas as pd
 import StringHandler as sh
+import numpy as np
 import xlrd
 import xlwt
 
@@ -23,8 +24,21 @@ def load(filename):
     return pd.read_excel(filename, 'Sheet1', index_col='date')
 
 
+def load_chosen_stocks(filename):
+    stock_ids = []
+    xlsx_file = xlrd.open_workbook(filename)
+    sheet1 = xlsx_file.sheets()[0]
+    row = 1
+    while row < sheet1.nrows:
+        temp = sheet1.cell(row, 0).value
+        stock_ids.append(temp)
+        row = row + 1
+    return stock_ids
+
+
 def downloadAll(date):
-    path = '/Users/Esmidth/Documents/Github/TushareMod/DataBase' + date.__str__() + '/'
+    # path = '/DataBase' + date.__str__() + '/'
+    path = 'DataBase' + date.__str__() + '/'
     for x in sh.lists:
         download(path + x + '.xlsx', x)
     print("Download finished")
@@ -61,6 +75,17 @@ def test_output():
 
 
 if __name__ == '__main__':
+    '''
+    chosen_stocks = 'Self_selected_stock.xlsx'
+    a = load_chosen_stocks(chosen_stocks)
+    print(a)
     print("timer started:%ss" % time.clock())
-    downloadAll(20160510)
+    '''
+    downloadAll(20170320)
+    '''
     print("timer ended:%ss" % time.clock())
+    f = xlrd.open_workbook('Self_selected_stock.xlsx')
+    #s1 = f.get_sheet(0)
+    table = f.sheets()[0]
+    print(table.cell(0,0))
+    '''
